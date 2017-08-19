@@ -17,10 +17,10 @@ public class tailNavigationScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+       
         if (name != "tailToCopy")
         {
-            
+            agent.speed = speed;
             agent.destination = Target.transform.position;
         }
         else

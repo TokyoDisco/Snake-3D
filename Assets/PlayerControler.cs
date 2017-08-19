@@ -78,10 +78,12 @@ public class PlayerControler : MonoBehaviour {
         {
           
             tailobjectList[tailobjectList.Count - 1].GetComponent<tailNavigationScript>().Target = gameObject;
+            tailobjectList[tailobjectList.Count - 1].GetComponent<NavMeshAgent>().Warp(gameObject.transform.position + gameObject.transform.forward * (-5));
         }
         else
         {
             tailobjectList[tailobjectList.Count - 1].GetComponent<tailNavigationScript>().Target = tailobjectList[tailobjectList.Count - 2];
+            tailobjectList[tailobjectList.Count - 1].GetComponent<NavMeshAgent>().Warp(tailobjectList[tailobjectList.Count - 1].transform.position + tailobjectList[tailobjectList.Count - 1].transform.forward * (-5));
         }
 
         //po kazdym zjedzeniu szybkosc wzrasta
@@ -121,7 +123,7 @@ public class PlayerControler : MonoBehaviour {
             for(int i = 0; i <tailobjectList.Count;i++)
             {
                 tailobjectList[i].GetComponent<BoxCollider>().enabled = false;
-                tailobjectList[i].GetComponent<NavMeshAgent>().Stop(true);
+                tailobjectList[i].GetComponent<NavMeshAgent>().isStopped = true;
 
             }
             pauseActive = true;
@@ -135,7 +137,7 @@ public class PlayerControler : MonoBehaviour {
                 for (int i = 0; i < tailobjectList.Count; i++)
                 {
                     tailobjectList[i].GetComponent<BoxCollider>().enabled = true;
-                    tailobjectList[i].GetComponent<NavMeshAgent>().Resume();
+                    tailobjectList[i].GetComponent<NavMeshAgent>().isStopped = false;
                 }
                 pauseActive = false;
                 speed = prePauseSpeed;
